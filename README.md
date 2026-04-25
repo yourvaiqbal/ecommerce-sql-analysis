@@ -24,19 +24,17 @@ The objective is to demonstrate practical SQL skills in a real-world data scenar
 ## Project Structure
 
 ecommerce-analysis/
-│
-├── sql/
-│   ├── 01_import.sql
-│   ├── 02_staging_validation.sql
-│   ├── 03_cleaning_dimensions.sql
-│   ├── 04_fact_modeling.sql
-│   └── 05_analysis_metrics.sql
-│
-├── assets/
-│   ├── erd.png
-│   └── dashboard.png
-│
-└── README.md
+  sql/
+    01_import.sql
+    02_staging_validation.sql
+    03_cleaning_dimensions.sql
+    04_fact_modeling.sql
+    05_analysis_metrics.sql
+  assets/
+    erd.png
+    dashboard.png
+  README.md
+  
 ---
 
 ## Data Pipeline
