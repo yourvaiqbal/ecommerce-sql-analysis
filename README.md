@@ -37,7 +37,6 @@ ecommerce-analysis/
 │   └── dashboard.png
 │
 └── README.md
-
 ---
 
 ## Data Pipeline
