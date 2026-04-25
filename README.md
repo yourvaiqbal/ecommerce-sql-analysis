@@ -23,7 +23,20 @@ The objective is to demonstrate practical SQL skills in a real-world data scenar
 
 ## Project Structure
 
-text ecommerce-analysis/ │ ├── sql/ │   ├── 01_import.sql │   ├── 02_staging_validation.sql │   ├── 03_cleaning_dimensions.sql │   ├── 04_fact_modeling.sql │   └── 05_analysis_metrics.sql │ ├── assets/ │   ├── erd.png │   └── dashboard.png │ └── README.md 
+ecommerce-analysis/
+│
+├── sql/
+│   ├── 01_import.sql
+│   ├── 02_staging_validation.sql
+│   ├── 03_cleaning_dimensions.sql
+│   ├── 04_fact_modeling.sql
+│   └── 05_analysis_metrics.sql
+│
+├── assets/
+│   ├── erd.png
+│   └── dashboard.png
+│
+└── README.md
 
 ---
 
@@ -117,7 +130,11 @@ Most customers place only one or two orders, while a small segment contributes d
 1. Load the dataset into PostgreSQL (via DBeaver or other client)
 2. Execute SQL scripts in order:
 
-text 01_import.sql 02_staging_validation.sql 03_cleaning_dimensions.sql 04_fact_modeling.sql 05_analysis_metrics.sql 
+01_import.sql
+02_staging_validation.sql
+03_cleaning_dimensions.sql
+04_fact_modeling.sql
+05_analysis_metrics.sql
 
 ---
 
