@@ -113,7 +113,7 @@ Tables:
 
 ## Entity Relationship Diagram (ERD)
 
-```
+```mermaid
 erDiagram
 
     %% ======================
