@@ -135,6 +135,7 @@ erDiagram
 
     dim_customers {
         string customer_id PK
+        string customer_unique_id
         string customer_city
         string customer_state
     }
@@ -142,6 +143,7 @@ erDiagram
     dim_products {
         string product_id PK
         string product_category_name
+        string product_category_name_en
     }
 
     dim_date {
@@ -154,15 +156,15 @@ erDiagram
     fact_orders {
         string order_id PK
         string customer_id FK
+        date order_date FK
+        string order_status
+        int total_items
+        decimal total_item_price
         decimal total_payment_value
-        decimal total_price
-        decimal total_freight
-        date order_date
     }
 
-    dim_customers ||--o{ fact_orders : has
-    dim_products ||--o{ fact_orders : contains
-    dim_date ||--o{ fact_orders : time
+    dim_customers ||--o{ fact_orders : customer
+    dim_date ||--o{ fact_orders : order_date
 ```
 
 ⸻
@@ -176,17 +178,20 @@ flowchart LR
         A[CSV Files]
     end
 
-    subgraph STAGING_LAYER [Staging schema]
+    subgraph STAGING_LAYER [Staging Schema]
         B[01_import.sql]
         C[02_staging_validation.sql]
     end
 
-    subgraph WAREHOUSE_LAYER [Data Warehouse - public schema]
-        D[03_cleaning_dimensions.sql\nDim Tables]
-        E[04_fact_modeling.sql\nFact Table]
+    subgraph TRANSFORMATION_LAYER [Transformation]
+        D[03_cleaning_dimensions.sql]
     end
 
-    subgraph ANALYTICS_LAYER [Analytics Layer]
+    subgraph FACT_LAYER [Fact Modeling]
+        E[04_fact_modeling.sql]
+    end
+
+    subgraph ANALYTICS_LAYER [Analytics]
         F[05_analysis_metrics.sql]
     end
 
@@ -298,4 +303,5 @@ Ahmad Iqbal Maulana
 Aspiring Data Analyst
 
 LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
+
 GitHub: https://github.com/yourvaiqbal
