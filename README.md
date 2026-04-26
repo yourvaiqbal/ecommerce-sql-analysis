@@ -14,9 +14,29 @@ Model: Star Schema (Fact & Dimension Tables)
 
 Project Overview
 
-This project analyzes the Brazilian Olist e-commerce dataset using SQL, following an end-to-end workflow from raw data ingestion to dashboard-ready analytical tables.
+This project builds an end-to-end SQL data pipeline to transform raw Brazilian e-commerce data into a structured analytical model for business decision-making.
 
-The project demonstrates data cleaning, transformation, dimensional modeling, and business metric generation.
+It simulates a real-world analytics workflow, starting from raw data ingestion to dashboard-ready datasets.
+
+Key capabilities demonstrated:
+
+* Designing layered data architecture (staging → warehouse)
+* Data cleaning and validation
+* Building dimensional models (fact and dimension tables)
+* Generating business-ready metrics
+
+⸻
+
+Business Impact
+
+This project enables:
+
+* Monitoring revenue performance over time
+* Understanding customer purchasing behavior
+* Identifying high-performing products and regions
+* Supporting data-driven decision making
+
+The final dataset is designed to be directly connected to BI tools such as Power BI, Tableau, or Looker Studio.
 
 ⸻
 
@@ -94,7 +114,7 @@ SQL Pipeline (Execution Order)
 01_data_import.sql
 
 * Create database and schema
-* Import CSV into staging
+* Import CSV files into staging
 
 ⸻
 
@@ -122,14 +142,14 @@ Creates:
 
 04_exploratory_analysis.sql
 
-* Analyze patterns
+* Analyze data patterns
 * Validate data logic
 
 ⸻
 
 05_business_metrics.sql
 
-* Generate KPIs
+* Generate business KPIs
 
 Includes:
 
@@ -155,18 +175,18 @@ Dashboard
 
 Connect tables from public schema to:
 
-* Power BI, link :
-* Tableau, link :
-* Looker Studio, link :
+* Power BI
+* Tableau
+* Looker Studio
 
 ⸻
 
 Key Insights
 
-* Majority of orders come from Southeast Brazil
-* Top categories drive most revenue
-* Delivery delays vary by region
-* Seller distribution is concentrated
+* Majority of revenue comes from Southeast Brazil
+* A small number of categories drive most sales
+* Delivery performance varies by region
+* Seller distribution is highly concentrated
 * Freight cost correlates with order value
 
 ⸻
@@ -184,9 +204,7 @@ Author
 
 Ahmad Iqbal Maulana
 Aspiring Data Analyst
-
 LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
-
 GitHub: https://github.com/yourvaiqbal
 
 ---
