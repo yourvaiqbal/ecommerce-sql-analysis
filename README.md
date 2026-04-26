@@ -7,7 +7,9 @@
 ⸻
 
 SQL: MySQL 8
+
 Focus: Analytics Engineering (SQL + Dashboard)
+
 Model: Star Schema (Fact & Dimension Tables)
 
 ⸻
@@ -203,8 +205,11 @@ Tech Stack
 Author
 
 Ahmad Iqbal Maulana
+
 Aspiring Data Analyst
+
 LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
+
 GitHub: https://github.com/yourvaiqbal
 
 ---
