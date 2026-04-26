@@ -9,7 +9,9 @@
 E-Commerce Analytics (Brazilian Olist Dataset)
 
 SQL: PostgreSQL
+
 Focus: Analytics Engineering (SQL + Dashboard)
+
 Model: Star Schema (Fact & Dimension Tables)
 
 ⸻
@@ -300,6 +302,7 @@ Tech Stack
 Author
 
 Ahmad Iqbal Maulana
+
 Aspiring Data Analyst
 
 LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
