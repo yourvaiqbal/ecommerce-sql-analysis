@@ -1,134 +1,84 @@
-# E-Commerce Analytics (Brazilian Olist Dataset)
+# E-Commerce Data Analysis (SQL End-to-End Project)
 
-![SQL](https://img.shields.io/badge/SQL-MySQL8-blue)
-![Stage](https://img.shields.io/badge/Stage-Analytics%20Engineering-green)
-![Focus](https://img.shields.io/badge/Focus-SQL%20%2B%20Dashboard-orange)
+## Overview
+This project demonstrates an end-to-end data pipeline using PostgreSQL to analyze e-commerce performance.
 
-⸻
+The workflow transforms raw transactional data into a structured analytical model (star schema), enabling business insights and dashboard integration.
 
-E-Commerce Analytics (Brazilian Olist Dataset)
+---
 
-SQL: PostgreSQL
+## Tech Stack
+- PostgreSQL
+- SQL (Data Cleaning, Aggregation, Modeling)
+- DBeaver
+- GitHub
 
-Focus: Analytics Engineering (SQL + Dashboard)
+---
 
-Model: Star Schema (Fact & Dimension Tables)
+## Project Structure
 
-⸻
-
-Project Overview
-
-This project builds an end-to-end SQL data pipeline to transform raw Brazilian e-commerce data into a structured analytical model for business decision-making.
-
-It simulates a real-world analytics workflow, starting from raw data ingestion to a dashboard-ready data model.
-
-Key capabilities demonstrated:
-
-* Designing layered data architecture (staging → warehouse → analytics)
-* Data validation and quality checks
-* Building dimensional models (fact and dimension tables)
-* Generating business-ready metrics using SQL
-
-⸻
-
-Business Impact
-
-This project enables:
-
-* Monitoring revenue performance over time
-* Understanding customer purchasing behavior
-* Identifying high-performing customers and trends
-* Detecting potential revenue discrepancies
-* Supporting data-driven decision making
-
-The final dataset is designed to be directly connected to BI tools such as Power BI, Tableau, or Looker Studio.
-
-⸻
-
-Data Pipeline Overview
-
-1. Import raw data
-2. Store in staging layer
-3. Validate and clean data
-4. Transform into dimensional model
-5. Generate business metrics
-6. Connect to dashboard
-
-⸻
-
-Repository Structure
-
+```ecommerce-sql-analysis/
+  sql/
+    01_import.sql
+    02_staging_validation.sql
+    03_cleaning_dimensions.sql
+    04_fact_modeling.sql
+    05_analysis_metrics.sql
+  assets/
+    erd.png
+    pipeline_flowchart.png
+    dashboard_preview.png
+  README.md
 ```
-ecommerce-sql-analysis/
-│
-├── sql/
-│   ├── 01_import.sql
-│   ├── 02_staging_validation.sql
-│   ├── 03_cleaning_dimensions.sql
-│   ├── 04_fact_modeling.sql
-│   └── 05_analysis_metrics.sql
-│
-├── diagrams/
-│   ├── erd.png
-│   └── pipeline_flowchart.png
-│
-├── dashboard/
-│   ├── dashboard.pbix
-│   └── dashboard_link.txt
-│
-├── images/
-│   └── dashboard_preview.png
-│
-└── README.md
-```
+---
 
-⸻
+## Data Pipeline
 
-Data Architecture
+1. Import raw data (CSV → staging schema)
+2. Validate data quality (NULL, duplicates, row counts)
+3. Clean and deduplicate data
+4. Build dimension tables
+5. Aggregate transactional data
+6. Build fact table (order-level)
+7. Generate analytical metrics
+8. Connect to BI tools
 
-Staging Layer (staging schema)
+---
 
-Raw data imported from CSV files.
+## Data Architecture
 
-Tables:
+### Staging Layer (staging schema)
+Raw data imported without transformation:
 
-* customers_raw
-* orders_raw
-* order_items_raw
-* payments_raw
-* products_raw
-* sellers_raw
-* category_translation_raw
+- customers_raw
+- orders_raw
+- order_items_raw
+- payments_raw
+- products_raw
+- category_translation_raw
 
-⸻
+---
 
-Data Warehouse Layer (public schema)
+### Warehouse Layer (public schema)
 
-Cleaned and transformed analytical tables using dimensional modeling.
+Cleaned and modeled tables:
 
-Tables:
+- dim_customers
+- dim_products
+- fact_orders
 
-* dim_customers
-* dim_products
-* dim_date
-* fact_orders
+---
 
-⸻
+## Data Model (Star Schema)
 
-Data Model
+- fact_orders (1 row = 1 order)
+- dim_customers
+- dim_products
 
-This project follows a star schema design:
+Note:
+dim_products is prepared for future product-level analysis but is not directly joined to fact_orders due to aggregation at the order level.
 
-* Fact Table:
-    * fact_orders (one row per order)
-* Dimension Tables:
-    * dim_customers
-    * dim_products
-    * dim_date
-
-This structure enables efficient analytical queries and dashboard integration.
-
-⸻
+---
 
 ## Entity Relationship Diagram (ERD)
 
@@ -148,163 +98,131 @@ erDiagram
         string product_category_name_en
     }
 
-    dim_date {
-        date order_date PK
-        int year
-        int month
-        int day
-    }
-
     fact_orders {
         string order_id PK
         string customer_id FK
-        date order_date FK
         string order_status
+        timestamp order_purchase_timestamp
         int total_items
         decimal total_item_price
         decimal total_payment_value
     }
 
     dim_customers ||--o{ fact_orders : customer
-    dim_date ||--o{ fact_orders : order_date
 ```
-
-⸻
+---
 
 ## Data Pipeline Flow
 
 ```mermaid
 flowchart LR
 
-    subgraph RAW_LAYER [Raw Layer]
-        A[CSV Files]
-    end
-
-    subgraph STAGING_LAYER [Staging Schema]
-        B[01_import.sql]
-        C[02_staging_validation.sql]
-    end
-
-    subgraph TRANSFORMATION_LAYER [Transformation]
-        D[03_cleaning_dimensions.sql]
-    end
-
-    subgraph FACT_LAYER [Fact Modeling]
-        E[04_fact_modeling.sql]
-    end
-
-    subgraph ANALYTICS_LAYER [Analytics]
-        F[05_analysis_metrics.sql]
-    end
-
-    subgraph BI_LAYER [Dashboard]
-        G[Power BI / Tableau / Looker Studio]
-    end
+    A[CSV Files]
+    B[01_import.sql]
+    C[02_staging_validation.sql]
+    D[03_cleaning_dimensions.sql]
+    E[04_fact_modeling.sql]
+    F[05_analysis_metrics.sql]
+    G[Dashboard / BI Tool]
 
     A --> B --> C --> D --> E --> F --> G
 ```
-This pipeline represents a structured analytics workflow, transforming raw transactional data into a dimensional model for business analysis and dashboarding.
+---
 
-Star Schema Model: fact_orders with dimension tables (dim_customers, dim_products)
+## SQL Pipeline (Execution Order)
 
-⸻
+1. 01_import.sql  
+   - Load raw data into staging schema  
 
-SQL Pipeline (Execution Order)
+2. 02_staging_validation.sql  
+   - Validate NULL values  
+   - Check duplicates  
+   - Verify row counts  
 
-01_import.sql
+3. 03_cleaning_dimensions.sql  
+   - Deduplicate using ROW_NUMBER()  
+   - Build dim_customers and dim_products  
 
-* Create database and schemas (staging, public)
-* Import CSV files into staging tables
+4. 04_fact_modeling.sql  
+   - Aggregate order_items and payments  
+   - Build fact_orders  
 
-02_staging_validation.sql
+   Key principle:
+   The fact table is built at the order level (one row per order), with pre-aggregated metrics to prevent double counting.
 
-* Validate raw data (NULL checks, duplicates, sanity checks)
-* Ensure consistency before transformation
+5. 05_analysis_metrics.sql  
+   - Revenue trend  
+   - Order distribution  
+   - Customer ranking  
+   - AOV calculation  
 
-03_cleaning_dimensions.sql
+---
 
-* Clean and standardize fields (TRIM, LOWER, date casting)
-* Build dimension tables:
-    * dim_customers
-    * dim_products
-    * dim_date
+## Data Validation
 
-04_fact_modeling.sql
+- No NULL order_id in staging
+- No duplicate order_id
+- Final row count:
 
-* Aggregate order_items and payments
-* Build fact table:
-    * fact_orders (one row per order)
+SELECT COUNT(*) FROM public.fact_orders;
+-- 99,441 rows
 
-05_analysis_metrics.sql
+---
 
-* Generate KPIs:
-    * Total revenue
-    * Total orders
-    * Average order value (AOV)
-* Perform advanced analysis:
-    * Monthly revenue trend
-    * Customer ranking
-    * Revenue growth (window function)
+## Key Insights
 
-⸻
+- Revenue shows clear growth trend over time
+- ~97% of orders are successfully delivered
+- Small percentage of orders are canceled or unavailable
+- Differences between item price and payment value indicate discounts or additional fees
+- A small group of customers contributes significantly to total revenue
 
-How to Run
+---
 
-1. Run 01_import.sql
-2. Run 02_staging_validation.sql
-3. Run 03_cleaning_dimensions.sql
-4. Run 04_fact_modeling.sql
-5. Run 05_analysis_metrics.sql
-6. Connect public tables to a BI tool
+## How to Run
 
-⸻
+1. Load dataset into PostgreSQL (via DBeaver)
 
-Dashboard
+2. Run SQL files in order:
 
-Connect the public schema to:
+01_import.sql  
+02_staging_validation.sql  
+03_cleaning_dimensions.sql  
+04_fact_modeling.sql  
+05_analysis_metrics.sql  
 
-* Power BI
-* Tableau
-* Looker Studio
+---
 
-(Optional) Add dashboard link here:
-Dashboard Link: (coming soon)
+## Sample Output (Recommended)
 
-⸻
+Add screenshot:
 
-Key Insights
+assets/revenue_trend.png
 
-* Revenue shows fluctuations with clear monthly trends
-* A small group of customers contributes significantly to total revenue
-* Order value and payment value discrepancies can indicate data issues
-* Business performance can be monitored effectively using aggregated metrics
+---
 
-⸻
+## Key Learnings
 
-Highlights
+- Data cleaning is critical before modeling
+- Aggregation must be done before joining transactional tables
+- Poor joins can lead to double counting
+- Star schema improves analytical performance
+- SQL can be used to build full data pipelines
 
-* Built a structured SQL data pipeline from raw to analytics layer
-* Applied data validation across staging and transformation stages
-* Designed a star schema for scalable analytics
-* Implemented window functions for advanced business insights
+---
 
-⸻
+## Author
 
-Tech Stack
+Ahmad Iqbal Maulana  
+Aspiring Data Analyst  
 
-* PostgreSQL
-* SQL (Analytics Engineering)
-* Data Modeling (Star Schema)
-* Power BI / Tableau / Looker Studio
+LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
+GitHub: https://github.com/yourvaiqbal  
 
-⸻
+---
 
-Author
+## Notes
 
-Ahmad Iqbal Maulana
+Dataset: Brazilian E-Commerce Public Dataset (Olist)
 
-Aspiring Data Analyst
-
-LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
-
-GitHub: https://github.com/yourvaiqbal
+This project is part of a portfolio for entry-level data analyst roles.
