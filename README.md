@@ -113,63 +113,47 @@ Tables:
 
 SQL Pipeline (Execution Order)
 
-01_data_import.sql
+01_import.sql
 
-* Create database and schema
-* Import CSV files into staging
+* Create database and schemas (staging, public)
+* Import CSV files into staging tables
 
-⸻
+02_staging_validation.sql
 
-02_data_cleaning.sql
+* Validate raw data (null checks, basic sanity checks)
+* Ensure structure consistency before cleaning
 
-* Trim text fields
-* Standardize formats
-* Fix data types
-* Validate values
+03_cleaning_dimensions.sql
 
-⸻
+* Clean and standardize fields (TRIM, date, numeric)
+* Build dimension tables:
+    * dim_customers
+    * dim_products
 
-03_data_transformation.sql
+04_fact_modeling.sql
 
-* Join tables
-* Build dimensional model
+* Join cleaned data
+* Build fact table:
+    * fact_orders
 
-Creates:
+05_analysis_metrics.sql
 
-* dim_customers
-* dim_products
-* fact_orders
-
-⸻
-
-04_exploratory_analysis.sql
-
-* Analyze data patterns
-* Validate data logic
-
-⸻
-
-05_business_metrics.sql
-
-* Generate business KPIs
-
-Includes:
-
-* Total revenue
-* Total orders
-* Average order value
-* Revenue by category
+* Generate KPIs:
+    * Total revenue
+    * Total orders
+    * Average order value (AOV)
+    * Category performance
 
 ⸻
 
 How to Run
 
-1. Run 01_data_import.sql
-2. Run 02_data_cleaning.sql
-3. Run 03_data_transformation.sql
-4. Run 04_exploratory_analysis.sql
-5. Run 05_business_metrics.sql
-6. Connect to dashboard
+1. Run 01_import.sql
+2. Run 02_staging_validation.sql
+3. Run 03_cleaning_dimensions.sql
+4. Run 04_fact_modeling.sql
+5. Run 05_analysis_metrics.sql
+6. Connect public tables to dashboard
 
 ⸻
 
