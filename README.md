@@ -59,11 +59,11 @@ Repository Structure
 ecommerce-sql-analysis/
 │
 ├── sql/
-│   ├── 01_data_import.sql
-│   ├── 02_data_cleaning.sql
-│   ├── 03_data_transformation.sql
-│   ├── 04_exploratory_analysis.sql
-│   └── 05_business_metrics.sql
+│   ├── 01_import.sql
+│   ├── 02_staging_validation.sql
+│   ├── 03_cleaning_dimensions.sql
+│   ├── 04_fact_modeling.sql
+│   └── 05_analysis_metrics.sql
 │
 ├── diagrams/
 │   ├── erd.png
