@@ -83,6 +83,96 @@ ecommerce-sql-analysis/
 
 Data Architecture
 
+```
+erDiagram
+
+    %% ======================
+    %% STAGING (RAW LAYER)
+    %% ======================
+
+    customers_raw {
+        string customer_id PK
+        string customer_unique_id
+        string customer_city
+        string customer_state
+    }
+
+    orders_raw {
+        string order_id PK
+        string customer_id FK
+        date order_purchase_timestamp
+        string order_status
+    }
+
+    order_items_raw {
+        string order_id FK
+        int order_item_id PK
+        string product_id FK
+        string seller_id FK
+        decimal price
+        decimal freight_value
+    }
+
+    payments_raw {
+        string order_id FK
+        string payment_type
+        decimal payment_value
+    }
+
+    products_raw {
+        string product_id PK
+        string product_category_name
+    }
+
+    sellers_raw {
+        string seller_id PK
+        string seller_city
+        string seller_state
+    }
+
+    %% ======================
+    %% DATA WAREHOUSE (STAR SCHEMA)
+    %% ======================
+
+    dim_customers {
+        string customer_id PK
+        string customer_city
+        string customer_state
+    }
+
+    dim_products {
+        string product_id PK
+        string product_category_name
+    }
+
+    fact_orders {
+        string order_id PK
+        string customer_id FK
+        string product_id FK
+        decimal total_payment_value
+        decimal price
+        decimal freight_value
+        date order_date
+    }
+
+    %% ======================
+    %% RELATIONSHIPS (RAW)
+    %% ======================
+
+    customers_raw ||--o{ orders_raw : places
+    orders_raw ||--o{ order_items_raw : contains
+    orders_raw ||--o{ payments_raw : paid_by
+    order_items_raw }o--|| products_raw : includes
+    order_items_raw }o--|| sellers_raw : sold_by
+
+    %% ======================
+    %% RELATIONSHIPS (STAR)
+    %% ======================
+
+    dim_customers ||--o{ fact_orders : has
+    dim_products ||--o{ fact_orders : contains
+```
+
 Staging Layer (staging schema)
 
 Raw data imported from CSV files.
