@@ -207,6 +207,8 @@ erDiagram
 
 ## Data Pipeline Flow
 
+## Data Pipeline Flow
+
 ```mermaid
 flowchart LR
 
@@ -214,12 +216,12 @@ flowchart LR
         A[CSV Files]
     end
 
-    subgraph STAGING_LAYER [Staging (staging schema)]
+    subgraph STAGING_LAYER [Staging schema]
         B[01_import.sql]
         C[02_staging_validation.sql]
     end
 
-    subgraph WAREHOUSE_LAYER [Data Warehouse (public schema)]
+    subgraph WAREHOUSE_LAYER [Data Warehouse public schema]
         D[03_cleaning_dimensions.sql\nDim Tables]
         E[04_fact_modeling.sql\nFact Table]
     end
