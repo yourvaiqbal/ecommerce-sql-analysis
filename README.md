@@ -208,17 +208,31 @@ erDiagram
 ## Data Pipeline Flow
 
 ```mermaid
-flowchart TD
+flowchart LR
 
-    A[01_import.sql\nImport CSV → staging] --> B[02_staging_validation.sql\nValidate Raw Data]
+    subgraph RAW_LAYER [Raw Layer]
+        A[CSV Files]
+    end
 
-    B --> C[03_cleaning_dimensions.sql\nCleaning + Build Dimensions]
+    subgraph STAGING_LAYER [Staging (staging schema)]
+        B[01_import.sql]
+        C[02_staging_validation.sql]
+    end
 
-    C --> D[04_fact_modeling.sql\nBuild Fact Table]
+    subgraph WAREHOUSE_LAYER [Data Warehouse (public schema)]
+        D[03_cleaning_dimensions.sql\nDim Tables]
+        E[04_fact_modeling.sql\nFact Table]
+    end
 
-    D --> E[05_analysis_metrics.sql\nGenerate KPIs]
+    subgraph ANALYTICS_LAYER [Analytics Layer]
+        F[05_analysis_metrics.sql]
+    end
 
-    E --> F[Dashboard\nPower BI / Tableau / Looker Studio]
+    subgraph BI_LAYER [Dashboard]
+        G[Power BI / Tableau / Looker Studio]
+    end
+
+    A --> B --> C --> D --> E --> F --> G
 ```
 
 ⸻
