@@ -83,6 +83,36 @@ ecommerce-sql-analysis/
 
 Data Architecture
 
+Staging Layer (staging schema)
+
+Raw data imported from CSV files.
+
+Tables:
+
+* customers_raw
+* orders_raw
+* order_items_raw
+* payments_raw
+* products_raw
+* sellers_raw
+* category_translation_raw
+
+⸻
+
+Data Warehouse Layer (public schema)
+
+Cleaned and transformed analytical tables using dimensional modeling.
+
+Tables:
+
+* dim_customers
+* dim_products
+* fact_orders
+
+⸻
+
+## Entity Relationship Diagram (ERD)
+
 ```
 erDiagram
 
@@ -173,34 +203,7 @@ erDiagram
     dim_products ||--o{ fact_orders : contains
 ```
 
-Staging Layer (staging schema)
-
-Raw data imported from CSV files.
-
-Tables:
-
-* customers_raw
-* orders_raw
-* order_items_raw
-* payments_raw
-* products_raw
-* sellers_raw
-* category_translation_raw
-
 ⸻
-
-Data Warehouse Layer (public schema)
-
-Cleaned and transformed analytical tables using dimensional modeling.
-
-Tables:
-
-* dim_customers
-* dim_products
-* fact_orders
-
-⸻
-
 SQL Pipeline (Execution Order)
 
 01_import.sql
