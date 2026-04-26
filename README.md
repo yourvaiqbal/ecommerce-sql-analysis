@@ -1,158 +1,161 @@
-# E-Commerce Data Analysis (SQL End-to-End Project)
+E-Commerce Sales Analysis (SQL + Dashboard)
 
-## Overview
-This project builds a structured data pipeline using PostgreSQL to analyze e-commerce performance.
+Project Overview
 
-The workflow covers:
-- Raw data ingestion
-- Data validation
-- Data cleaning
-- Dimensional modeling (star schema)
-- Analytical queries for business insights
+This project analyzes e-commerce sales data using SQL and presents insights through an interactive dashboard. The goal is to demonstrate strong analytical thinking, SQL proficiency, and the ability to communicate business insights visually.
 
-The objective is to demonstrate practical SQL skills in a real-world data scenario and showcase end-to-end analytical thinking.
+⸻
 
----
+Objectives
 
-## Tech Stack
-- SQL (PostgreSQL)
-- DBeaver
-- GitHub
+* Analyze sales performance over time
+* Identify top-performing products and categories
+* Understand customer purchasing behavior
+* Provide actionable business insights
 
----
+⸻
 
-## Project Structure
-ecommerce-analysis/
-  sql/
-    01_import.sql
-    02_staging_validation.sql
-    03_cleaning_dimensions.sql
-    04_fact_modeling.sql
-    05_analysis_metrics.sql
-  assets/
-    erd.png
-    dashboard.png
-  README.md
-  
----
+Tools and Technologies
 
-## Data Pipeline
+* SQL (PostgreSQL / MySQL / BigQuery) – Data querying and analysis
+* Power BI / Tableau / Looker Studio – Data visualization and dashboard
+* Excel (optional) – Data validation
 
-### 1. Import Layer
-- Raw CSV files are loaded into the staging schema
-- No transformation is applied at this stage
+⸻
 
-### 2. Staging Validation
-- Null value checks
-- Duplicate detection
-- Row count verification
+Dataset
 
-### 3. Cleaning and Dimension Modeling
-- Deduplication using ROW_NUMBER()
-- Creation of dimension tables:
-  - dim_customers
-  - dim_products
-- Enrichment of product categories using translation mapping
+The dataset contains transactional e-commerce data, including:
 
-### 4. Fact Modeling
-- Aggregation of transactional tables:
-  - order_items → total_items, total_item_price
-  - payments → total_payment_value
-- Joined with orders to create:
-  - fact_orders (one row per order)
+* Order ID
+* Order Date
+* Customer ID
+* Product Name
+* Category
+* Quantity
+* Price
+* Total Sales
 
-### 5. Analysis Layer
-- Revenue trends
-- Order distribution
-- Customer behavior
-- Data consistency checks
+⸻
 
----
+Project Structure
 
-## Data Model (Star Schema)
+ecommerce-sales-analysis/
+│
+├── data/
+│   ├── raw/                  # Original dataset
+│   ├── processed/            # Cleaned dataset (if applicable)
+│
+├── sql/
+│   ├── schema.sql            # Table creation
+│   ├── data_cleaning.sql     # Cleaning queries
+│   ├── analysis.sql          # Business analysis queries
+│
+├── dashboard/
+│   ├── dashboard.pbix        # Power BI file or dashboard export
+│   ├── dashboard_link.txt    # Public dashboard URL (if available)
+│
+├── images/
+│   ├── dashboard_preview.png
+│
+├── README.md
 
-### fact_orders
-- order_id (Primary Key)
-- customer_id
-- order_purchase_timestamp
-- order_status
-- total_items
-- total_item_price
-- total_payment_value
+⸻
 
-### dim_customers
-- customer_unique_id
-- customer_city
-- customer_state
+SQL Analysis Highlights
 
-### dim_products
-- product_id
-- product_category_name
-- product_category_name_en
+Key queries included in this project:
 
----
+* Total revenue by month
+* Top 10 products by sales
+* Revenue by category
+* Customer segmentation (repeat vs new)
+* Average order value (AOV)
 
-## Key Insights
+Example:
 
-### Revenue Trend
-Revenue shows strong growth during 2017–2018, with noticeable peaks toward the end of the year, indicating potential seasonality effects.
+SELECT 
+    DATE_TRUNC('month', order_date) AS month,
+    SUM(total_sales) AS revenue
+FROM orders
+GROUP BY month
+ORDER BY month;
 
-### Order Status Distribution
-Approximately 97% of orders are successfully delivered, suggesting stable operational performance. The remaining orders are either canceled or unavailable.
+⸻
 
-### Revenue Consistency
-There are discrepancies between:
-- total_item_price
-- total_payment_value
+Dashboard Features
 
-Possible explanations include discounts, shipping fees, or system-level adjustments.
+The dashboard provides:
 
-### Customer Behavior
-Most customers place only one or two orders, while a small segment contributes disproportionately to total revenue.
+* Revenue trend over time
+* Top products and categories
+* Sales distribution
+* Key performance indicators (KPI):
+    * Total Revenue
+    * Total Orders
+    * Average Order Value
 
----
+⸻
 
-## Data Validation
+Dashboard Preview
 
-- No duplicate order_id in the fact table
-- Final row count: 99,441 orders
-- Null checks performed in staging layer
-- Aggregation logic prevents double counting
+⸻
 
----
+How to Run
 
-## How to Run
+1. Setup Database
 
-1. Load the dataset into PostgreSQL (via DBeaver or other client)
-2. Execute SQL scripts in order:
+Create a database and run:
 
-01_import.sql
-02_staging_validation.sql
-03_cleaning_dimensions.sql
-04_fact_modeling.sql
-05_analysis_metrics.sql
+-- schema
+sql/schema.sql
 
----
+-- optional cleaning
+sql/data_cleaning.sql
 
-## Key Learnings
+2. Run Analysis
 
-- Data cleaning is critical before modeling
-- Improper joins can lead to data duplication
-- Aggregation must be handled carefully in transactional data
-- A structured schema improves both performance and clarity
-- SQL can be used to build complete data pipelines, not just queries
+Execute:
 
----
+sql/analysis.sql
 
-## Author
+Use tools such as:
 
-Ahmad Iqbal Maulana  
-Aspiring Data Analyst with focus on SQL, Python, and Business Intelligence
+* DBeaver
+* PostgreSQL
+* MySQL
 
----
+⸻
 
-## Notes
+3. Open Dashboard
 
-This project is part of a data analyst portfolio aimed at entry-level and remote opportunities.
+* Open dashboard.pbix using Power BI Desktop
+* Or open the public dashboard link from:
 
-Dataset: Brazilian E-Commerce Public Dataset (Olist)
+dashboard/dashboard_link.txt
+
+⸻
+
+Skills Demonstrated
+
+* SQL querying (aggregation, grouping, filtering)
+* Data modeling (basic schema design)
+* Business analysis and KPI definition
+* Data visualization and storytelling
+
+⸻
+
+Future Improvements
+
+* Add more advanced SQL (window functions, cohort analysis)
+* Optimize queries for performance
+* Automate data refresh for dashboard
+
+⸻
+
+Author
+
+Your Name
+Aspiring Data Analyst
+LinkedIn: https://linkedin.com/in/your-profile
+GitHub: https://github.com/your-username
