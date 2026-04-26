@@ -4,41 +4,44 @@
 ![Stage](https://img.shields.io/badge/Stage-Analytics%20Engineering-green)
 ![Focus](https://img.shields.io/badge/Focus-SQL%20%2B%20Dashboard-orange)
 
----
+⸻
 
-## Project Overview
-This project analyzes the Brazilian Olist e-commerce dataset using SQL, following a structured analytics engineering approach. It includes data cleaning, transformation, exploratory analysis, and business metric generation to produce dashboard-ready datasets.
+SQL: MySQL 8
+Focus: Analytics Engineering (SQL + Dashboard)
+Model: Star Schema (Fact & Dimension Tables)
 
-The project demonstrates SQL proficiency, data modeling, and the ability to translate raw data into actionable business insights.
+⸻
 
----
+Project Overview
 
-## Workflow
-1. Data Cleaning – Standardize and validate raw tables  
-2. Data Transformation – Build analytical summary tables  
-3. Exploratory Analysis – Understand patterns and data quality  
-4. Business Metrics – Generate KPIs for dashboards  
+This project analyzes the Brazilian Olist e-commerce dataset using SQL, following an end-to-end workflow from raw data ingestion to dashboard-ready analytical tables.
 
----
+The project demonstrates data cleaning, transformation, dimensional modeling, and business metric generation.
 
-## Key Insights
-- 65% of orders come from the Southeast region of Brazil  
-- Electronics and furniture categories generate the highest revenue  
-- Average delivery delay is 12.4 days, with worse delays in northern regions  
-- 80% of sellers are concentrated in only 3 states  
-- Freight cost shows moderate correlation with order value  
+⸻
 
----
+Data Pipeline Overview
 
-## Repository Structure
+1. Import raw data
+2. Store in staging layer
+3. Clean and validate data
+4. Transform into dimensional model
+5. Generate business metrics
+6. Connect to dashboard
+
+⸻
+
+Repository Structure
+
 ```
-e-commerce-analytics-olist-brazil/
+ecommerce-sql-analysis/
 │
 ├── sql/
-│   ├── data_cleaning.sql
-│   ├── data_transformation.sql
-│   ├── exploratory_queries.sql
-│   └── business_metrics.sql
+│   ├── 01_data_import.sql
+│   ├── 02_data_cleaning.sql
+│   ├── 03_data_transformation.sql
+│   ├── 04_exploratory_analysis.sql
+│   └── 05_business_metrics.sql
 │
 ├── diagrams/
 │   ├── erd.png
@@ -54,18 +57,134 @@ e-commerce-analytics-olist-brazil/
 └── README.md
 ```
 
+⸻
+
+Data Architecture
+
+Staging Layer (staging schema)
+
+Raw data imported from CSV files.
+
+Tables:
+
+* customers_raw
+* orders_raw
+* order_items_raw
+* payments_raw
+* products_raw
+* sellers_raw
+* category_translation_raw
+
+⸻
+
+Data Warehouse Layer (public schema)
+
+Cleaned and transformed analytical tables using dimensional modeling.
+
+Tables:
+
+* dim_customers
+* dim_products
+* fact_orders
+
+⸻
+
+SQL Pipeline (Execution Order)
+
+01_data_import.sql
+
+* Create database and schema
+* Import CSV into staging
+
+⸻
+
+02_data_cleaning.sql
+
+* Trim text fields
+* Standardize formats
+* Fix data types
+* Validate values
+
+⸻
+
+03_data_transformation.sql
+
+* Join tables
+* Build dimensional model
+
+Creates:
+
+* dim_customers
+* dim_products
+* fact_orders
+
+⸻
+
+04_exploratory_analysis.sql
+
+* Analyze patterns
+* Validate data logic
+
+⸻
+
+05_business_metrics.sql
+
+* Generate KPIs
+
+Includes:
+
+* Total revenue
+* Total orders
+* Average order value
+* Revenue by category
+
+⸻
+
+How to Run
+
+1. Run 01_data_import.sql
+2. Run 02_data_cleaning.sql
+3. Run 03_data_transformation.sql
+4. Run 04_exploratory_analysis.sql
+5. Run 05_business_metrics.sql
+6. Connect to dashboard
+
+⸻
+
+Dashboard
+
+Connect tables from public schema to:
+
+* Power BI, link :
+* Tableau, link :
+* Looker Studio, link :
+
+⸻
+
+Key Insights
+
+* Majority of orders come from Southeast Brazil
+* Top categories drive most revenue
+* Delivery delays vary by region
+* Seller distribution is concentrated
+* Freight cost correlates with order value
+
+⸻
+
+Tech Stack
+
+* MySQL 8
+* SQL (Analytics Engineering)
+* Data Modeling (Star Schema)
+* Power BI / Tableau / Looker Studio
+
+⸻
+
+Author
+
+Ahmad Iqbal Maulana
+Aspiring Data Analyst
+LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
+GitHub: https://github.com/yourvaiqbal
+
 ---
-
-## How to Run
-1. Import dataset into MySQL  
-2. Run sql/data_cleaning.sql  
-3. Run sql/data_transformation.sql  
-4. Run sql/exploratory_queries.sql & sql/business_metrics.sql  
-5. Connect to dashboard tool  
-
----
-
-## Author
-Ahmad Iqbal Maulana  
-LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
-GitHub: https://github.com/yourvaiqbal  
