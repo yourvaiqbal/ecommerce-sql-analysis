@@ -1,161 +1,69 @@
-E-Commerce Sales Analysis (SQL + Dashboard)
+# E-Commerce Analytics (Brazilian Olist Dataset)
 
-Project Overview
+![SQL](https://img.shields.io/badge/SQL-MySQL8-blue)
+![Stage](https://img.shields.io/badge/Stage-Analytics%20Engineering-green)
+![Focus](https://img.shields.io/badge/Focus-SQL%20%2B%20Dashboard-orange)
 
-This project analyzes e-commerce sales data using SQL and presents insights through an interactive dashboard. The goal is to demonstrate strong analytical thinking, SQL proficiency, and the ability to communicate business insights visually.
+---
 
-⸻
+## Project Overview
+This project analyzes the Brazilian Olist e-commerce dataset using SQL, following a structured analytics engineering approach. It includes data cleaning, transformation, exploratory analysis, and business metric generation to produce dashboard-ready datasets.
 
-Objectives
+The project demonstrates SQL proficiency, data modeling, and the ability to translate raw data into actionable business insights.
 
-* Analyze sales performance over time
-* Identify top-performing products and categories
-* Understand customer purchasing behavior
-* Provide actionable business insights
+---
 
-⸻
+## Workflow
+1. Data Cleaning – Standardize and validate raw tables  
+2. Data Transformation – Build analytical summary tables  
+3. Exploratory Analysis – Understand patterns and data quality  
+4. Business Metrics – Generate KPIs for dashboards  
 
-Tools and Technologies
+---
 
-* SQL (PostgreSQL / MySQL / BigQuery) – Data querying and analysis
-* Power BI / Tableau / Looker Studio – Data visualization and dashboard
-* Excel (optional) – Data validation
+## Key Insights
+- 65% of orders come from the Southeast region of Brazil  
+- Electronics and furniture categories generate the highest revenue  
+- Average delivery delay is 12.4 days, with worse delays in northern regions  
+- 80% of sellers are concentrated in only 3 states  
+- Freight cost shows moderate correlation with order value  
 
-⸻
+---
 
-Dataset
-
-The dataset contains transactional e-commerce data, including:
-
-* Order ID
-* Order Date
-* Customer ID
-* Product Name
-* Category
-* Quantity
-* Price
-* Total Sales
-
-⸻
-
-Project Structure
-
-ecommerce-sales-analysis/
-│
-├── data/
-│   ├── raw/                  # Original dataset
-│   ├── processed/            # Cleaned dataset (if applicable)
+## Repository Structure
+e-commerce-analytics-olist-brazil/
 │
 ├── sql/
-│   ├── schema.sql            # Table creation
-│   ├── data_cleaning.sql     # Cleaning queries
-│   ├── analysis.sql          # Business analysis queries
+│   ├── data_cleaning.sql
+│   ├── data_transformation.sql
+│   ├── exploratory_queries.sql
+│   └── business_metrics.sql
+│
+├── diagrams/
+│   ├── erd.png
+│   └── pipeline_flowchart.png
 │
 ├── dashboard/
-│   ├── dashboard.pbix        # Power BI file or dashboard export
-│   ├── dashboard_link.txt    # Public dashboard URL (if available)
+│   ├── dashboard.pbix
+│   └── dashboard_link.txt
 │
 ├── images/
-│   ├── dashboard_preview.png
+│   └── dashboard_preview.png
 │
-├── README.md
+└── README.md
 
-⸻
+---
 
-SQL Analysis Highlights
+## How to Run
+1. Import dataset into MySQL  
+2. Run sql/data_cleaning.sql  
+3. Run sql/data_transformation.sql  
+4. Run sql/exploratory_queries.sql & sql/business_metrics.sql  
+5. Connect to dashboard tool  
 
-Key queries included in this project:
+---
 
-* Total revenue by month
-* Top 10 products by sales
-* Revenue by category
-* Customer segmentation (repeat vs new)
-* Average order value (AOV)
-
-Example:
-
-SELECT 
-    DATE_TRUNC('month', order_date) AS month,
-    SUM(total_sales) AS revenue
-FROM orders
-GROUP BY month
-ORDER BY month;
-
-⸻
-
-Dashboard Features
-
-The dashboard provides:
-
-* Revenue trend over time
-* Top products and categories
-* Sales distribution
-* Key performance indicators (KPI):
-    * Total Revenue
-    * Total Orders
-    * Average Order Value
-
-⸻
-
-Dashboard Preview
-
-⸻
-
-How to Run
-
-1. Setup Database
-
-Create a database and run:
-
--- schema
-sql/schema.sql
-
--- optional cleaning
-sql/data_cleaning.sql
-
-2. Run Analysis
-
-Execute:
-
-sql/analysis.sql
-
-Use tools such as:
-
-* DBeaver
-* PostgreSQL
-* MySQL
-
-⸻
-
-3. Open Dashboard
-
-* Open dashboard.pbix using Power BI Desktop
-* Or open the public dashboard link from:
-
-dashboard/dashboard_link.txt
-
-⸻
-
-Skills Demonstrated
-
-* SQL querying (aggregation, grouping, filtering)
-* Data modeling (basic schema design)
-* Business analysis and KPI definition
-* Data visualization and storytelling
-
-⸻
-
-Future Improvements
-
-* Add more advanced SQL (window functions, cohort analysis)
-* Optimize queries for performance
-* Automate data refresh for dashboard
-
-⸻
-
-Author
-
-Ahmad Iqbal Maulana
-Aspiring Data Analyst
-LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
-GitHub: https://github.com/yourvaiqbal
+## Author
+Ahmad Iqbal Maulana  
+LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
+GitHub: https://github.com/yourvaiqbal  
