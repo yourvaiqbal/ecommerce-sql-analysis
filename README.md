@@ -31,6 +31,7 @@ The project demonstrates SQL proficiency, data modeling, and the ability to tran
 ---
 
 ## Repository Structure
+```
 e-commerce-analytics-olist-brazil/
 │
 ├── sql/
@@ -51,6 +52,7 @@ e-commerce-analytics-olist-brazil/
 │   └── dashboard_preview.png
 │
 └── README.md
+```
 
 ---
 
