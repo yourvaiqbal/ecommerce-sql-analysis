@@ -203,6 +203,23 @@ erDiagram
     dim_products ||--o{ fact_orders : contains
 ```
 
+⸻
+
+## Data Pipeline Flow
+
+```mermaid
+flowchart TD
+
+    A[01_import.sql\nImport CSV → staging] --> B[02_staging_validation.sql\nValidate Raw Data]
+
+    B --> C[03_cleaning_dimensions.sql\nCleaning + Build Dimensions]
+
+    C --> D[04_fact_modeling.sql\nBuild Fact Table]
+
+    D --> E[05_analysis_metrics.sql\nGenerate KPIs]
+
+    E --> F[Dashboard\nPower BI / Tableau / Looker Studio]
+```
 
 ⸻
 
