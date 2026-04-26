@@ -155,7 +155,7 @@ Future Improvements
 
 Author
 
-Your Name
+Ahmad Iqbal Maulana
 Aspiring Data Analyst
-LinkedIn: https://linkedin.com/in/your-profile
-GitHub: https://github.com/your-username
+LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
+GitHub: https://github.com/yourvaiqbal
