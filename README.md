@@ -6,10 +6,10 @@
 
 ⸻
 
-SQL: MySQL 8
+E-Commerce Analytics (Brazilian Olist Dataset)
 
+SQL: PostgreSQL
 Focus: Analytics Engineering (SQL + Dashboard)
-
 Model: Star Schema (Fact & Dimension Tables)
 
 ⸻
@@ -18,14 +18,14 @@ Project Overview
 
 This project builds an end-to-end SQL data pipeline to transform raw Brazilian e-commerce data into a structured analytical model for business decision-making.
 
-It simulates a real-world analytics workflow, starting from raw data ingestion to dashboard-ready datasets.
+It simulates a real-world analytics workflow, starting from raw data ingestion to a dashboard-ready data model.
 
 Key capabilities demonstrated:
 
-* Designing layered data architecture (staging → warehouse)
-* Data cleaning and validation
+* Designing layered data architecture (staging → warehouse → analytics)
+* Data validation and quality checks
 * Building dimensional models (fact and dimension tables)
-* Generating business-ready metrics
+* Generating business-ready metrics using SQL
 
 ⸻
 
@@ -35,7 +35,8 @@ This project enables:
 
 * Monitoring revenue performance over time
 * Understanding customer purchasing behavior
-* Identifying high-performing products and regions
+* Identifying high-performing customers and trends
+* Detecting potential revenue discrepancies
 * Supporting data-driven decision making
 
 The final dataset is designed to be directly connected to BI tools such as Power BI, Tableau, or Looker Studio.
@@ -46,7 +47,7 @@ Data Pipeline Overview
 
 1. Import raw data
 2. Store in staging layer
-3. Clean and validate data
+3. Validate and clean data
 4. Transform into dimensional model
 5. Generate business metrics
 6. Connect to dashboard
@@ -107,7 +108,23 @@ Tables:
 
 * dim_customers
 * dim_products
+* dim_date
 * fact_orders
+
+⸻
+
+Data Model
+
+This project follows a star schema design:
+
+* Fact Table:
+    * fact_orders (one row per order)
+* Dimension Tables:
+    * dim_customers
+    * dim_products
+    * dim_date
+
+This structure enables efficient analytical queries and dashboard integration.
 
 ⸻
 
@@ -115,54 +132,6 @@ Tables:
 
 ```mermaid
 erDiagram
-
-    %% ======================
-    %% STAGING (RAW LAYER)
-    %% ======================
-
-    customers_raw {
-        string customer_id PK
-        string customer_unique_id
-        string customer_city
-        string customer_state
-    }
-
-    orders_raw {
-        string order_id PK
-        string customer_id FK
-        date order_purchase_timestamp
-        string order_status
-    }
-
-    order_items_raw {
-        string order_id FK
-        int order_item_id PK
-        string product_id FK
-        string seller_id FK
-        decimal price
-        decimal freight_value
-    }
-
-    payments_raw {
-        string order_id FK
-        string payment_type
-        decimal payment_value
-    }
-
-    products_raw {
-        string product_id PK
-        string product_category_name
-    }
-
-    sellers_raw {
-        string seller_id PK
-        string seller_city
-        string seller_state
-    }
-
-    %% ======================
-    %% DATA WAREHOUSE (STAR SCHEMA)
-    %% ======================
 
     dim_customers {
         string customer_id PK
@@ -175,37 +144,28 @@ erDiagram
         string product_category_name
     }
 
+    dim_date {
+        date order_date PK
+        int year
+        int month
+        int day
+    }
+
     fact_orders {
         string order_id PK
         string customer_id FK
-        string product_id FK
         decimal total_payment_value
-        decimal price
-        decimal freight_value
+        decimal total_price
+        decimal total_freight
         date order_date
     }
 
-    %% ======================
-    %% RELATIONSHIPS (RAW)
-    %% ======================
-
-    customers_raw ||--o{ orders_raw : places
-    orders_raw ||--o{ order_items_raw : contains
-    orders_raw ||--o{ payments_raw : paid_by
-    order_items_raw }o--|| products_raw : includes
-    order_items_raw }o--|| sellers_raw : sold_by
-
-    %% ======================
-    %% RELATIONSHIPS (STAR)
-    %% ======================
-
     dim_customers ||--o{ fact_orders : has
     dim_products ||--o{ fact_orders : contains
+    dim_date ||--o{ fact_orders : time
 ```
 
 ⸻
-
-## Data Pipeline Flow
 
 ## Data Pipeline Flow
 
@@ -221,7 +181,7 @@ flowchart LR
         C[02_staging_validation.sql]
     end
 
-    subgraph WAREHOUSE_LAYER [Data Warehouse public schema]
+    subgraph WAREHOUSE_LAYER [Data Warehouse - public schema]
         D[03_cleaning_dimensions.sql\nDim Tables]
         E[04_fact_modeling.sql\nFact Table]
     end
@@ -236,6 +196,9 @@ flowchart LR
 
     A --> B --> C --> D --> E --> F --> G
 ```
+This pipeline represents a structured analytics workflow, transforming raw transactional data into a dimensional model for business analysis and dashboarding.
+
+Star Schema Model: fact_orders with dimension tables (dim_customers, dim_products)
 
 ⸻
 
@@ -248,21 +211,22 @@ SQL Pipeline (Execution Order)
 
 02_staging_validation.sql
 
-* Validate raw data (null checks, basic sanity checks)
-* Ensure structure consistency before cleaning
+* Validate raw data (NULL checks, duplicates, sanity checks)
+* Ensure consistency before transformation
 
 03_cleaning_dimensions.sql
 
-* Clean and standardize fields (TRIM, date, numeric)
+* Clean and standardize fields (TRIM, LOWER, date casting)
 * Build dimension tables:
     * dim_customers
     * dim_products
+    * dim_date
 
 04_fact_modeling.sql
 
-* Join cleaned data
+* Aggregate order_items and payments
 * Build fact table:
-    * fact_orders
+    * fact_orders (one row per order)
 
 05_analysis_metrics.sql
 
@@ -270,7 +234,10 @@ SQL Pipeline (Execution Order)
     * Total revenue
     * Total orders
     * Average order value (AOV)
-    * Category performance
+* Perform advanced analysis:
+    * Monthly revenue trend
+    * Customer ranking
+    * Revenue growth (window function)
 
 ⸻
 
@@ -281,33 +248,44 @@ How to Run
 3. Run 03_cleaning_dimensions.sql
 4. Run 04_fact_modeling.sql
 5. Run 05_analysis_metrics.sql
-6. Connect public tables to dashboard
+6. Connect public tables to a BI tool
 
 ⸻
 
 Dashboard
 
-Connect tables from public schema to:
+Connect the public schema to:
 
 * Power BI
 * Tableau
 * Looker Studio
 
+(Optional) Add dashboard link here:
+Dashboard Link: (coming soon)
+
 ⸻
 
 Key Insights
 
-* Majority of revenue comes from Southeast Brazil
-* A small number of categories drive most sales
-* Delivery performance varies by region
-* Seller distribution is highly concentrated
-* Freight cost correlates with order value
+* Revenue shows fluctuations with clear monthly trends
+* A small group of customers contributes significantly to total revenue
+* Order value and payment value discrepancies can indicate data issues
+* Business performance can be monitored effectively using aggregated metrics
+
+⸻
+
+Highlights
+
+* Built a structured SQL data pipeline from raw to analytics layer
+* Applied data validation across staging and transformation stages
+* Designed a star schema for scalable analytics
+* Implemented window functions for advanced business insights
 
 ⸻
 
 Tech Stack
 
-* MySQL 8
+* PostgreSQL
 * SQL (Analytics Engineering)
 * Data Modeling (Star Schema)
 * Power BI / Tableau / Looker Studio
@@ -317,11 +295,7 @@ Tech Stack
 Author
 
 Ahmad Iqbal Maulana
-
 Aspiring Data Analyst
 
 LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
-
 GitHub: https://github.com/yourvaiqbal
-
----
