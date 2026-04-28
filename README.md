@@ -351,3 +351,20 @@ Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 ## Order Status Distribution
 
 ![Order Status](assets/order_status_distribution.png)
+
+Overview
+Tech Stack
+Project Structure
+Data Pipeline
+Data Architecture
+Data Model
+ERD IMAGE
+Pipeline IMAGE
+Dashboard Preview
+Revenue Trend
+Order Distribution
+SQL Pipeline
+Key Insights
+Author
+
+oke untuk ini saya catat, tapi apa perlu gfile png lagi? kan sudah bisa kebaca di readme dengan bantuan mermaid?
