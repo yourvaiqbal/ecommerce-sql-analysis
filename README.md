@@ -1,13 +1,27 @@
 # E-Commerce Data Analysis (SQL End-to-End Project)
 
 ## Overview
-This project demonstrates an end-to-end data pipeline using PostgreSQL to analyze e-commerce performance.
 
-The workflow transforms raw transactional data into a structured analytical model (star schema), enabling business insights and dashboard integration.
+This project is a portfolio-based SQL analytics project built using the Brazilian Olist E-Commerce Dataset.
+
+The objective of this project is to simulate a real-world end-to-end analytics engineering workflow, starting from raw CSV data ingestion, data validation, dimensional modeling, fact table construction, and analytical metric generation using PostgreSQL.
+
+The project demonstrates practical SQL skills commonly used in data analyst and analytics engineering roles, including:
+
+- Data cleaning
+- Data validation
+- Dimensional modeling
+- Aggregation logic
+- Fact table design
+- Business metric analysis
+- Query optimization mindset
+
+The final output is a structured analytical model (star schema) designed for dashboard integration with BI tools such as Power BI, Tableau, or Looker Studio.
 
 ---
 
 ## Tech Stack
+
 - PostgreSQL
 - SQL (Data Cleaning, Aggregation, Modeling)
 - DBeaver
@@ -17,71 +31,114 @@ The workflow transforms raw transactional data into a structured analytical mode
 
 ## Project Structure
 
-```ecommerce-sql-analysis/
+```
+ecommerce-sql-analysis/
+
+  dataset/
+    category_translation.csv
+    customer.csv
+    order_items.csv
+    orders.csv
+    payments.csv
+    products.csv
+    sellers.csv
+
   sql/
     01_import.sql
     02_staging_validation.sql
     03_cleaning_dimensions.sql
     04_fact_modeling.sql
     05_analysis_metrics.sql
+
   assets/
+    revenue_trend.png
+    order_status_distribution.png
     erd.png
     pipeline_flowchart.png
     dashboard_preview.png
+
   README.md
 ```
 ---
 
 ## Data Pipeline
 
-1. Import raw data (CSV → staging schema)
-2. Validate data quality (NULL, duplicates, row counts)
-3. Clean and deduplicate data
+1. Import raw CSV data into staging schema
+2. Validate data quality (NULL checks, duplicates, row counts)
+3. Clean and standardize data
 4. Build dimension tables
 5. Aggregate transactional data
-6. Build fact table (order-level)
-7. Generate analytical metrics
-8. Connect to BI tools
-
----
+6. Build fact table at the order level
+7. Generate analytical business metrics
+8. Connect the final model to BI tools
 
 ## Data Architecture
 
-### Staging Layer (staging schema)
-Raw data imported without transformation:
+Staging Layer (staging schema)
 
-- customers_raw
-- orders_raw
-- order_items_raw
-- payments_raw
-- products_raw
-- category_translation_raw
+Raw transactional data imported without transformation.
+
+Tables:
+
+* customers_raw
+* orders_raw
+* order_items_raw
+* payments_raw
+* products_raw
+* category_translation_raw
+
+Purpose:
+
+* Store raw imported data
+* Perform validation before transformation
+* Preserve original dataset integrity
 
 ---
 
-### Warehouse Layer (public schema)
+Warehouse Layer (public schema)
 
-Cleaned and modeled tables:
+Cleaned and modeled analytical tables.
 
-- dim_customers
-- dim_products
-- fact_orders
+Tables:
+
+* dim_customers
+* dim_products
+* fact_orders
+
+Purpose:
+
+* Provide business-ready analytical tables
+* Support dashboarding and reporting
+* Enable scalable SQL analysis
 
 ---
 
-## Data Model (Star Schema)
+### Data Model (Star Schema)
 
-- fact_orders (1 row = 1 order)
-- dim_customers
-- dim_products
+This project uses a simplified star schema design.
+
+Fact Table
+
+* fact_orders
+    * One row represents one order
+
+Dimension Tables
+
+* dim_customers
+* dim_products
+
+Modeling Principle
+
+The fact table is intentionally built at the order level using pre-aggregated transactional data.
+
+This prevents double counting issues commonly caused by joining multiple transactional tables directly.
 
 Note:
-dim_products is prepared for future product-level analysis but is not directly joined to fact_orders due to aggregation at the order level.
+dim_products is prepared for future product-level analysis but is not directly joined to fact_orders because the current model focuses on order-level aggregation.
 
 ---
 
 ## Entity Relationship Diagram (ERD)
-
 ```mermaid
 erDiagram
 
@@ -110,9 +167,10 @@ erDiagram
 
     dim_customers ||--o{ fact_orders : customer
 ```
+
 ---
 
-## Data Pipeline Flow
+Data Pipeline Flow
 
 ```mermaid
 flowchart LR
@@ -127,102 +185,169 @@ flowchart LR
 
     A --> B --> C --> D --> E --> F --> G
 ```
+
 ---
 
 ## SQL Pipeline (Execution Order)
 
-1. 01_import.sql  
-   - Load raw data into staging schema  
+1. 01_import.sql
 
-2. 02_staging_validation.sql  
-   - Validate NULL values  
-   - Check duplicates  
-   - Verify row counts  
+Purpose:
 
-3. 03_cleaning_dimensions.sql  
-   - Deduplicate using ROW_NUMBER()  
-   - Build dim_customers and dim_products  
+* Import raw CSV files into PostgreSQL
+* Store data inside staging schema
 
-4. 04_fact_modeling.sql  
-   - Aggregate order_items and payments  
-   - Build fact_orders  
+---
 
-   Key principle:
-   The fact table is built at the order level (one row per order), with pre-aggregated metrics to prevent double counting.
+2. 02_staging_validation.sql
 
-5. 05_analysis_metrics.sql  
-   - Revenue trend  
-   - Order distribution  
-   - Customer ranking  
-   - AOV calculation  
+Validation checks:
+
+* NULL value detection
+* Duplicate detection
+* Row count verification
+* Data sanity checking
+
+Purpose:
+
+* Ensure raw data quality before transformation
+
+---
+
+3. 03_cleaning_dimensions.sql
+
+Transformations:
+
+* Deduplicate customer records using ROW_NUMBER()
+* Standardize data structure
+* Build dimension tables
+
+Generated tables:
+
+* dim_customers
+* dim_products
+
+---
+
+4. 04_fact_modeling.sql
+
+Transformations:
+
+* Aggregate order items
+* Aggregate payment records
+* Build order-level fact table
+
+Generated table:
+
+* fact_orders
+
+Key principle:
+
+The fact table is intentionally aggregated before joining transactional tables to prevent duplicated metrics and incorrect revenue calculations.
+
+---
+
+5. 05_analysis_metrics.sql
+
+Business analysis generated:
+
+* Revenue trend analysis
+* Order distribution analysis
+* Customer ranking
+* Average Order Value (AOV)
+* Revenue contribution analysis
 
 ---
 
 ## Data Validation
 
-- No NULL order_id in staging
-- No duplicate order_id
-- Final row count:
+Validation results:
 
-SELECT COUNT(*) FROM public.fact_orders;
--- 99,441 rows
+* No NULL order_id
+* No duplicate order_id
+* Final fact table row count matches expected order count
 
----
+```
+SELECT COUNT(*) 
+FROM public.fact_orders;
 
-## Key Insights
+-- Result: 99,441 rows
+```
 
-- Revenue shows clear growth trend over time
-- ~97% of orders are successfully delivered
-- Small percentage of orders are canceled or unavailable
-- Differences between item price and payment value indicate discounts or additional fees
-- A small group of customers contributes significantly to total revenue
+Key Insights
 
----
-
-## How to Run
-
-1. Load dataset into PostgreSQL (via DBeaver)
-
-2. Run SQL files in order:
-
-01_import.sql  
-02_staging_validation.sql  
-03_cleaning_dimensions.sql  
-04_fact_modeling.sql  
-05_analysis_metrics.sql  
+* Revenue shows an overall upward trend over time
+* Approximately 97% of orders were successfully delivered
+* A small percentage of orders were canceled or unavailable
+* Differences between item totals and payment totals may indicate discounts, shipping fees, or installment calculations
+* A relatively small group of customers contributes a large portion of total revenue
 
 ---
 
-## Sample Output (Recommended)
+## Sample Output
 
-Add screenshot:
+Recommended screenshots:
 
-assets/revenue_trend.png
+* Revenue trend analysis (file png) ini dari SQL ??
+* Order status distribution (file png) ini dari SQL ??
+* Dashboard preview (file png)
 
 ---
 
 ## Key Learnings
 
-- Data cleaning is critical before modeling
-- Aggregation must be done before joining transactional tables
-- Poor joins can lead to double counting
-- Star schema improves analytical performance
-- SQL can be used to build full data pipelines
-
----
+* Data validation is critical before transformation
+* Aggregation should occur before joining transactional tables
+* Improper joins can create double counting issues
+* Star schema design improves analytical scalability
+* SQL can be used to build complete analytical pipelines
 
 ## Author
 
-Ahmad Iqbal Maulana  
-Aspiring Data Analyst  
+Ahmad Iqbal Maulana
+Aspiring Data Analyst
 
-LinkedIn: https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
-GitHub: https://github.com/yourvaiqbal  
+LinkedIn:
+https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
+
+GitHub:
+https://github.com/yourvaiqbal
 
 ---
 
 ## Notes
 
-Dataset: Brazilian E-Commerce Public Dataset (Olist)
+Dataset:
+Brazilian E-Commerce Public Dataset by Olist
 
-This project is part of a portfolio for entry-level data analyst roles.
+Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+--- 
+
+## Entity Relationship Diagram (ERD)
+
+![ERD](assets/erd.png)
+
+---
+
+## Data Pipeline Flow
+
+![Pipeline](assets/pipeline_flowchart.png)
+
+---
+
+## Dashboard Preview
+
+![Dashboard](assets/dashboard_preview.png)
+
+---
+
+## Revenue Trend Analysis
+
+![Revenue Trend](assets/revenue_trend.png)
+
+---
+
+## Order Status Distribution
+
+![Order Status](assets/order_status_distribution.png)
