@@ -367,4 +367,7 @@ SQL Pipeline
 Key Insights
 Author
 
+Currency values are displayed symbolically for visualization purposes.
+Original dataset currency: Brazilian Real (BRL).
+
 oke untuk ini saya catat, tapi apa perlu gfile png lagi? kan sudah bisa kebaca di readme dengan bantuan mermaid?
