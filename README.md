@@ -34,6 +34,9 @@ The final output is a structured analytical model (star schema) designed for das
 ```
 ecommerce-sql-analysis/
 
+  assets/
+    dashboard_preview.png
+
   dataset/
     category_translation.csv
     customer.csv
@@ -50,15 +53,9 @@ ecommerce-sql-analysis/
     04_fact_modeling.sql
     05_analysis_metrics.sql
 
-  assets/
-    revenue_trend.png
-    order_status_distribution.png
-    erd.png
-    pipeline_flowchart.png
-    dashboard_preview.png
-
   README.md
 ```
+
 ---
 
 ## Data Pipeline
@@ -139,6 +136,7 @@ dim_products is prepared for future product-level analysis but is not directly j
 ---
 
 ## Entity Relationship Diagram (ERD)
+
 ```mermaid
 erDiagram
 
@@ -185,6 +183,11 @@ flowchart LR
 
     A --> B --> C --> D --> E --> F --> G
 ```
+---
+
+## Dashboard Preview
+
+![Dashboard Preview](assets/dashboard_preview.png)
 
 ---
 
@@ -302,72 +305,23 @@ Recommended screenshots:
 * Star schema design improves analytical scalability
 * SQL can be used to build complete analytical pipelines
 
+---
+
 ## Author
 
-Ahmad Iqbal Maulana
-Aspiring Data Analyst
+Ahmad Iqbal Maulana — Aspiring Data Analyst
 
-LinkedIn:
+LinkedIn:  
 https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
 
-GitHub:
+GitHub:  
 https://github.com/yourvaiqbal
 
 ---
 
 ## Notes
 
-Dataset:
-Brazilian E-Commerce Public Dataset by Olist
-
+Dataset: Brazilian E-Commerce Public Dataset by Olist  
 Source: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
---- 
-
-## Entity Relationship Diagram (ERD)
-
-![ERD](assets/erd.png)
-
 ---
-
-## Data Pipeline Flow
-
-![Pipeline](assets/pipeline_flowchart.png)
-
----
-
-## Dashboard Preview
-
-![Dashboard](assets/dashboard_preview.png)
-
----
-
-## Revenue Trend Analysis
-
-![Revenue Trend](assets/revenue_trend.png)
-
----
-
-## Order Status Distribution
-
-![Order Status](assets/order_status_distribution.png)
-
-Overview
-Tech Stack
-Project Structure
-Data Pipeline
-Data Architecture
-Data Model
-ERD IMAGE
-Pipeline IMAGE
-Dashboard Preview
-Revenue Trend
-Order Distribution
-SQL Pipeline
-Key Insights
-Author
-
-Currency values are displayed symbolically for visualization purposes.
-Original dataset currency: Brazilian Real (BRL).
-
-oke untuk ini saya catat, tapi apa perlu gfile png lagi? kan sudah bisa kebaca di readme dengan bantuan mermaid?
