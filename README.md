@@ -1,4 +1,5 @@
-# E-Commerce Data Analysis (SQL End-to-End Project)
+## E-Commerce Data Analysis (SQL End-to-End Project)
+
 
 ## Overview
 
@@ -20,6 +21,7 @@ The final output is a structured analytical model (star schema) designed for das
 
 ---
 
+
 ## Tech Stack
 
 - PostgreSQL
@@ -28,6 +30,7 @@ The final output is a structured analytical model (star schema) designed for das
 - GitHub
 
 ---
+
 
 ## Project Structure
 
@@ -110,7 +113,7 @@ Purpose:
 
 ---
 
-### Data Model (Star Schema)
+## Data Model (Star Schema)
 
 This project uses a simplified star schema design.
 
@@ -168,7 +171,7 @@ erDiagram
 
 ---
 
-Data Pipeline Flow
+## Data Pipeline Flow
 
 ```mermaid
 flowchart LR
@@ -193,72 +196,12 @@ flowchart LR
 
 ## SQL Pipeline (Execution Order)
 
-1. 01_import.sql
-
-Purpose:
-
-* Import raw CSV files into PostgreSQL
-* Store data inside staging schema
-
----
-
-2. 02_staging_validation.sql
-
-Validation checks:
-
-* NULL value detection
-* Duplicate detection
-* Row count verification
-* Data sanity checking
-
-Purpose:
-
-* Ensure raw data quality before transformation
-
----
-
-3. 03_cleaning_dimensions.sql
-
-Transformations:
-
-* Deduplicate customer records using ROW_NUMBER()
-* Standardize data structure
-* Build dimension tables
-
-Generated tables:
-
-* dim_customers
-* dim_products
-
----
-
-4. 04_fact_modeling.sql
-
-Transformations:
-
-* Aggregate order items
-* Aggregate payment records
-* Build order-level fact table
-
-Generated table:
-
-* fact_orders
-
-Key principle:
-
-The fact table is intentionally aggregated before joining transactional tables to prevent duplicated metrics and incorrect revenue calculations.
-
----
-
-5. 05_analysis_metrics.sql
-
-Business analysis generated:
-
-* Revenue trend analysis
-* Order distribution analysis
-* Customer ranking
-* Average Order Value (AOV)
-* Revenue contribution analysis
+1. Import raw CSV data
+2. Clean staging tables
+3. Build dimension tables
+4. Create fact table
+5. Generate business metrics
+6. Visualize in Tableau
 
 ---
 
@@ -278,22 +221,11 @@ FROM public.fact_orders;
 ```
 
 Key Insights
-
-* Revenue shows an overall upward trend over time
-* Approximately 97% of orders were successfully delivered
-* A small percentage of orders were canceled or unavailable
-* Differences between item totals and payment totals may indicate discounts, shipping fees, or installment calculations
-* A relatively small group of customers contributes a large portion of total revenue
-
----
-
-## Sample Output
-
-Recommended screenshots:
-
-* Revenue trend analysis (file png) ini dari SQL ??
-* Order status distribution (file png) ini dari SQL ??
-* Dashboard preview (file png)
+ * More than 95% of orders were successfully delivered.
+ * Revenue growth accelerated significantly during 2017.
+ * Peak sales performance occurred between Q4 2017 and Q2 2018.
+ * Operational issues such as cancellations and unavailable products remained minimal.
+ * Order fulfillment consistency indicates strong marketplace operational stability.
 
 ---
 
@@ -309,7 +241,7 @@ Recommended screenshots:
 
 ## Author
 
-Ahmad Iqbal Maulana — Aspiring Data Analyst
+Ahmad Iqbal Maulana — Data Analyst
 
 LinkedIn:  
 https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
