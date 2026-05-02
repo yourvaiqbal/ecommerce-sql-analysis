@@ -3,24 +3,38 @@
 
 ## Overview
 
-This project is a portfolio-based SQL analytics project built using the Brazilian Olist E-Commerce Dataset.
+This project is an end-to-end SQL data analytics project built using the Brazilian Olist E-Commerce Dataset covering transactions between 2016 and 2018. Focuses on transforming raw transactional e-commerce data into a structured analytical data model using PostgreSQL. The workflow includes raw data ingestion, data validation, dimensional modeling, fact table construction, business metric generation, and dashboard integration for business reporting.
 
-The objective of this project is to simulate a real-world end-to-end analytics engineering workflow, starting from raw CSV data ingestion, data validation, dimensional modeling, fact table construction, and analytical metric generation using PostgreSQL.
+Demonstrates practical skills commonly used in Data Analyst and Analytics Engineering roles, including:
 
-The project demonstrates practical SQL skills commonly used in data analyst and analytics engineering roles, including:
+* SQL data cleaning and transformation
+* Data validation and quality checks
+* Dimensional modeling
+* Fact table construction
+* Aggregation and KPI analysis
+* Analytical query development
+* Business performance analysis
+* Dashboard-ready data preparation
 
-- Data cleaning
-- Data validation
-- Dimensional modeling
-- Aggregation logic
-- Fact table design
-- Business metric analysis
-- Query optimization mindset
-
-The final output is a structured analytical model (star schema) designed for dashboard integration with BI tools such as Power BI, Tableau, or Looker Studio.
+The final analytical model is designed using a simplified star schema approach to support scalable reporting and dashboard visualization in BI tools such as Tableau.
 
 ---
 
+## Business Insights
+
+Key business insights identified from the analysis:
+
+* Total revenue reached approximately R$16M during the analysis period.
+* More than 95% of orders were successfully delivered, indicating strong operational fulfillment performance.
+* Revenue growth accelerated significantly throughout 2017 and peaked during early-to-mid 2018.
+* São Paulo (SP) generated the highest customer revenue contribution among all states.
+* Average Order Value (AOV) remained relatively stable, indicating consistent customer purchasing behavior.
+* Operational issues such as canceled and unavailable orders remained at low levels compared to completed deliveries.
+* Quarterly revenue trends reveal strong marketplace expansion before experiencing a decline in late 2018.
+
+These findings demonstrate how SQL-based analytical workflows can be used to generate actionable business insights from raw transactional datasets.
+
+--- 
 
 ## Tech Stack
 
@@ -38,7 +52,7 @@ The final output is a structured analytical model (star schema) designed for das
 ecommerce-sql-analysis/
 
   assets/
-    dashboard_preview.png
+    e-commerce_sales.png
 
   dataset/
     category_translation.csv
@@ -190,7 +204,7 @@ flowchart LR
 
 ## Dashboard Preview
 
-![Dashboard Preview](assets/dashboard_preview.png)
+![Dashboard Preview](assets/e-commerce_sales.png)
 
 ---
 
@@ -220,13 +234,14 @@ FROM public.fact_orders;
 -- Result: 99,441 rows
 ```
 
-Key Insights
- * More than 95% of orders were successfully delivered.
- * Revenue growth accelerated significantly during 2017.
- * Peak sales performance occurred between Q4 2017 and Q2 2018.
- * Operational issues such as cancellations and unavailable products remained minimal.
- * Order fulfillment consistency indicates strong marketplace operational stability.
+## Analytical Findings
 
+* Successfully transformed raw transactional data into a dashboard-ready analytical warehouse.
+* Built a fact table containing 99,441 validated order-level records.
+* Implemented aggregation strategies to avoid double-counting issues during transactional joins.
+* Created reusable analytical structures for KPI reporting and BI visualization.
+* Developed business-focused metrics including revenue trends, order fulfillment analysis, customer geographic performance, and average order value trends.
+  
 ---
 
 ## Key Learnings
@@ -238,16 +253,30 @@ Key Insights
 * SQL can be used to build complete analytical pipelines
 
 ---
+## Dashboard & Reporting
+
+The final analytical model was connected to Tableau to create an interactive business dashboard featuring:
+
+* Revenue KPI tracking
+* Order volume monitoring
+* Average Order Value (AOV) analysis
+* Seller activity overview
+* Revenue trend analysis
+* Order fulfillment status analysis
+* Customer geographic revenue distribution
+
+The dashboard was designed to simulate a real-world executive business reporting environment commonly used in e-commerce analytics.
+
+---
 
 ## Author
 
 Ahmad Iqbal Maulana — Data Analyst
 
 LinkedIn:  
-https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228
-
+https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
 GitHub:  
-https://github.com/yourvaiqbal
+https://github.com/yourvaiqbal  
 
 ---
 
