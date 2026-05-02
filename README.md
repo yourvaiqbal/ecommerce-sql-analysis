@@ -34,12 +34,21 @@ Key business insights identified from the analysis:
 
 These findings demonstrate how SQL-based analytical workflows can be used to generate actionable business insights from raw transactional datasets.
 
+## Business Questions Answered
+
+* Which states generated the highest revenue?
+* How did revenue trend evolve between 2016 and 2018?
+* What percentage of orders were successfully delivered?
+* How stable was Average Order Value (AOV) over time?
+* Which operational statuses contributed most to fulfillment issues?
+
 --- 
 
 ## Tech Stack
 
 - PostgreSQL
-- SQL (Data Cleaning, Aggregation, Modeling)
+- SQL
+- Tableau
 - DBeaver
 - GitHub
 
