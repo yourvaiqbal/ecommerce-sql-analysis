@@ -284,8 +284,6 @@ Ahmad Iqbal Maulana — Data Analyst
 
 LinkedIn:  
 https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
-GitHub:  
-https://github.com/yourvaiqbal  
 
 ---
 
