@@ -282,9 +282,6 @@ The dashboard was designed to simulate a real-world executive business reporting
 
 Ahmad Iqbal Maulana — Data Analyst
 
-LinkedIn:  
-https://www.linkedin.com/in/ahmad-iqbal-maulana-9669b8228  
-
 ---
 
 ## Notes
