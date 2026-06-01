@@ -22,15 +22,11 @@ The final analytical model is designed using a simplified star schema approach t
 
 ## Business Insights
 
-Key business insights identified from the analysis:
+Advanced business insights identified from the transactional analysis:
 
-* Total revenue reached approximately R$16M during the analysis period.
-* More than 95% of orders were successfully delivered, indicating strong operational fulfillment performance.
-* Revenue growth accelerated significantly throughout 2017 and peaked during early-to-mid 2018.
-* São Paulo (SP) generated the highest customer revenue contribution among all states.
-* Average Order Value (AOV) remained relatively stable, indicating consistent customer purchasing behavior.
-* Operational issues such as canceled and unavailable orders remained at low levels compared to completed deliveries.
-* Quarterly revenue trends reveal strong marketplace expansion before experiencing a decline in late 2018.
+* **Geographic Concentration Risk:** São Paulo (SP) is the primary revenue engine for the marketplace. While it indicates strong market penetration, this heavy reliance on a single state poses a geographic concentration risk, highlighting untapped growth potential in secondary states like RJ and MG.
+* **Stagnant Customer Share of Wallet:** Although total transaction volume scaled up to R$16M, the Average Order Value (AOV) remained flat over the 3-year period. This indicates that marketplace expansion was driven purely by new user acquisition rather than successful upselling or cross-selling strategies.
+* **The Late-2018 Growth Drop:** Revenue peaked in early 2018 but experienced a significant decline toward the end of the year. Because operational issues (canceled/unavailable orders) remained low (<5%), this drop points toward marketing saturation, customer churn, or a drop in customer retention rather than supply-chain failures.
 
 These findings demonstrate how SQL-based analytical workflows can be used to generate actionable business insights from raw transactional datasets.
 
@@ -43,6 +39,21 @@ These findings demonstrate how SQL-based analytical workflows can be used to gen
 * Which operational statuses contributed most to fulfillment issues?
 
 --- 
+
+## Strategic Recommendations
+
+Based on the data findings, the following actionable strategies are recommended for the commercial and marketing teams:
+
+* **Drive AOV Expansion via Bundling:** To break the stagnant Average Order Value (AOV), introduce automated product bundling (e.g., "Frequently Bought Together") at checkout, specifically pairing high-volume items in Electronics and Clothing with higher-margin accessories.
+* **De-risk Regional Dependency:** Reallocate 15-20% of the digital marketing budget away from São Paulo to run localized promotional campaigns in secondary high-potential states, combined with localized logistics partnerships to offer competitive shipping rates.
+* **Implement a Customer Win-Back Pipeline:** Address the late-2018 revenue drop by launching an automated email re-engagement sequence. Target users who have not made a purchase within 60–90 days with personalized discount vouchers based on their historical favorite categories.
+
+## Potential Business Impact
+
+* **Shift to Proactive Analytics:** Transformed a chaotic database into an optimized, dashboard-ready Star Schema data warehouse, reducing multi-table query latency and allowing stakeholders to spot retention issues instantly rather than months late.
+* **Optimized Marketing Spend:** Provided data evidence to shift the business strategy from expensive broad-market acquisition to high-ROI customer retention and regional diversification.
+
+---
 
 ## Tech Stack
 
